@@ -64,15 +64,16 @@ h1, h2, h3 {letter-spacing: -0.01em;}
 .step {padding:.35rem .9rem; border-radius:999px; background:#F1EFEB; color:#777; font-weight:600; font-size:.95rem;}
 .step.on {background:#C00000; color:#fff;}
 .step.done {background:#E8E4DD; color:#444;}
-.board {display:flex; gap:.8rem; flex-wrap:wrap; margin-bottom:.9rem;}
-.cty {flex:1 1 170px; min-width:170px; background:#fff; border:1px solid #E4E1DB; border-radius:14px;
-      padding:.8rem .9rem .7rem .9rem; position:relative; box-shadow:0 1px 3px rgba(0,0,0,.05);}
+.board {display:flex; gap:.65rem; flex-wrap:wrap; margin-bottom:.9rem;}
+.cty {flex:1 1 0; min-width:132px; background:#fff; border:1px solid #E4E1DB; border-radius:14px;
+      padding:.75rem .75rem .65rem .75rem; position:relative; box-shadow:0 1px 3px rgba(0,0,0,.05);}
+@media (max-width: 700px) {.cty {flex:1 1 150px;}}
 .cty.attacked {border:2px solid #C00000; background:#FFF6F6;}
 .cty .rank {position:absolute; top:.55rem; right:.7rem; font-weight:800; font-size:1.05rem; color:#999;}
 .cty .rank.r1 {color:#C00000;}
-.cty .nm {font-weight:700; font-size:1.15rem; margin:.35rem 0 .45rem 0; color:#222;}
+.cty .nm {font-weight:700; font-size:1.1rem; margin:.35rem 0 .45rem 0; color:#222; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
 .cty .row {display:flex; justify-content:space-between; align-items:baseline; margin:.1rem 0;}
-.cty .lbl {color:#777; font-size:.85rem; text-transform:uppercase; letter-spacing:.05em;}
+.cty .lbl {color:#777; font-size:.8rem; text-transform:uppercase; letter-spacing:.04em;}
 .cty .big {font-size:2rem; font-weight:800; color:#222; line-height:1.1;}
 .cty .chg {font-size:.95rem; font-weight:700; margin-left:.35rem;}
 .chg.up {color:#C00000;} .chg.down {color:#2E7D32;} .chg.flat {color:#999;}
