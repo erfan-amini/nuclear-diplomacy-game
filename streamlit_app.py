@@ -179,6 +179,8 @@ h2.vt {font-family:"Barlow Condensed",sans-serif; font-weight:700; font-size:1.7
 .dname b {font-size:1.08rem;} .dname .sub {display:block; color:var(--muted); font-size:.84rem; font-weight:400; line-height:1.15;}
 .dres {font-family:"Barlow Condensed",sans-serif; font-size:1.5rem; font-weight:700; color:var(--ink); text-align:right; line-height:1;}
 .dres .s {font-family:"Barlow",sans-serif; font-size:.8rem; font-weight:500; color:var(--muted); display:block;}
+.dres .s.wait {color:var(--signal); font-weight:700;}
+.waitnote {color:var(--signal); font-weight:700; font-size:.92rem; line-height:1.25; margin-top:.2rem;}
 .req {display:inline-block; background:var(--amber); color:#2B2100; font-weight:700; font-size:.8rem; border-radius:999px; padding:0 8px;}
 button[data-variant="segmented_control"] {min-width:3.2rem;}
 button[data-variant="segmented_control"] p {font-size:1.08rem; font-weight:700;}
@@ -437,11 +439,11 @@ def stage_decide():
                 st.html(f'<div class="dname">{flag(c, 26)}<div><b>{NAMES[c]}</b>{sub}</div></div>')
             with b:
                 chosen[c] = st.segmented_control(
-                    f"{NAMES[c]} move", game.legal_moves(c), format_func=signed,
+                    f"{NAMES[c]} move", game.legal_moves(c), format_func=signed, required=True,
                     key=f"mv_{game.seed}_{r.number}_{c}", label_visibility="collapsed")
             with d:
                 if chosen[c] is None:
-                    st.html('<div class="dres"><span class="s">waiting</span></div>')
+                    st.html('<div class="dres"><span class="s wait">pick a move</span></div>')
                 else:
                     after = game.nw[c] + chosen[c]
                     st.html(f'<div class="dres">{after}<span class="s">{"weapon" if after == 1 else "weapons"}</span></div>')
@@ -454,7 +456,7 @@ def stage_decide():
     with right:
         if missing:
             st.button("Lock in decisions", type="primary", disabled=True, icon=":material/lock:", width="stretch")
-            st.caption("Waiting for: " + ", ".join(missing))
+            st.html(f'<div class="waitnote">Still waiting for {", ".join(missing)}</div>')
         elif st.button("Lock in decisions", type="primary", icon=":material/lock:", width="stretch"):
             game.submit_moves(chosen)
             save_and_rerun(game)
