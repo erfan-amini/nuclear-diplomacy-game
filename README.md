@@ -22,9 +22,11 @@ stay on the left the whole time. The main area follows the round:
 
 Repeat for five rounds (the default; change it in Settings), then end the game.
 
-- **Settings** holds everything else: the section name, rounds planned, undo, end
-  game, new game, the public rules, and three switches (the secret-rule breakdown,
-  the suspense before the result, and the explosion).
+- **End game** and **New game** sit at the bottom of the left panel, under the
+  standings. Each asks you to confirm.
+- **Settings** holds the rest: the section name, rounds planned, undo, the public
+  rules, and three switches (the secret-rule breakdown, the suspense before the
+  result, and the explosion).
 - **The address bar holds the game.** A refresh, or the same link opened later,
   brings it back exactly.
 - **History** has the round-by-round tables and charts, and a CSV download.

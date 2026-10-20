@@ -158,6 +158,12 @@ h2.vt {font-family:"Barlow Condensed",sans-serif; font-weight:700; font-size:1.7
 .sb-world .w i {font-style:normal; margin-left:auto; color:#E8EDF3; font-size:.92rem;}
 .sb-world .w i b {color:#FF8A80; font-size:1.25rem;}
 
+/* game controls in the left panel */
+.pop-t {color:#E8EDF3; font-size:1rem; line-height:1.35; max-width:22rem;}
+section[data-testid="stSidebar"] [data-testid="stPopover"] button {background:#253042; border:1px solid #3B475B; color:#E8EDF3;}
+section[data-testid="stSidebar"] [data-testid="stPopover"] button:hover {border-color:#FF8A80; color:#fff;}
+section[data-testid="stSidebar"] [data-testid="stPopover"] button:disabled {opacity:.45;}
+
 /* odds meter */
 .meter {display:grid; grid-template-columns:repeat(6,1fr); gap:4px; margin-top:6px;}
 .band {border-radius:7px; padding:3px 1px; text-align:center; background:#fff; border:1px solid var(--line); line-height:1.12;}
@@ -765,19 +771,19 @@ def view_history():
         st.download_button("Download the activity log (CSV)", csv_log(), file_name=name, mime="text/csv",
                            icon=":material/download:")
     else:
-        h = 34 + 30 * 5 + 2
+        h = 34 + 28 * 5 + 2
         st.html('<div class="ch-t">Moves</div>')
         st.dataframe(by_country_table(lambda rd, c: signed(rd.moves[c]), None), hide_index=True, width="stretch",
-                     height=h, column_config=FLAGCOL, row_height=30)
+                     height=h, column_config=FLAGCOL, row_height=28)
         c3, c4 = st.columns(2, gap="large")
         with c3:
             st.html('<div class="ch-t">GPR</div>')
             st.dataframe(by_country_table(lambda rd, c: rd.gpr_after[c], START_GPR), hide_index=True, width="stretch",
-                         height=h, column_config=FLAGCOL, row_height=30)
+                         height=h, column_config=FLAGCOL, row_height=28)
         with c4:
             st.html('<div class="ch-t">Weapons</div>')
             st.dataframe(by_country_table(lambda rd, c: rd.nw_after[c], START_NW), hide_index=True, width="stretch",
-                         height=h, column_config=FLAGCOL, row_height=30)
+                         height=h, column_config=FLAGCOL, row_height=28)
 
 
 # ----------------------------------------------------------------------------- debrief
@@ -900,14 +906,8 @@ def view_settings():
                 save_and_rerun(game)
         else:
             st.button("Undo", icon=":material/undo:", disabled=True, width="stretch")
-        if done and not game.over:
-            with st.popover("End the game", icon=":material/flag:", width="stretch"):
-                st.write("End now and open the debrief? A round that has not reached its attack stage is dropped.")
-                st.button("Yes, end the game", type="primary", on_click=end_game)
-        with st.popover("New game", icon=":material/restart_alt:", width="stretch"):
-            st.write("Start over from the opening table? This game will be cleared.")
-            st.button("Yes, start a new game", type="primary", on_click=new_game)
-        st.caption("The address bar keeps the whole game. A refresh, or the same link opened later, brings it back.")
+        st.caption("End game and New game are at the bottom of the left panel. "
+                   "The address bar keeps the whole game: a refresh, or the same link opened later, brings it back.")
 
     with st.expander("Rules for everyone"):
       st.markdown(
@@ -920,6 +920,20 @@ def view_settings():
         "- **Sanctions.** The three lowest GPRs may sanction one or both of the two highest. A sanctioned country "
         "must cut by its maximum next round, or take +2. **A country with 0 weapons cannot be sanctioned.**")
       st.caption(f"Game design and country briefs: the K=1 Project, Columbia University. Code: {REPO}")
+
+
+# ----------------------------------------------------------------------------- left panel: game controls
+with st.sidebar:
+    a, b = st.columns(2, gap="small")
+    with a:
+        with st.popover("End game", icon=":material/flag:", width="stretch",
+                        disabled=not done or game.over):
+            st.html('<div class="pop-t">End now and open the debrief? A round that has not reached its attack stage is dropped.</div>')
+            st.button("Yes, end the game", type="primary", on_click=end_game, width="stretch")
+    with b:
+        with st.popover("New game", icon=":material/restart_alt:", width="stretch"):
+            st.html('<div class="pop-t">Start over from the opening table? This game will be cleared.</div>')
+            st.button("Yes, start a new game", type="primary", on_click=new_game, width="stretch")
 
 
 # ----------------------------------------------------------------------------- route
