@@ -872,13 +872,12 @@ def set_pref(name, key):
 
 
 def view_settings():
-    left, mid, right = st.columns(3, gap="large")
+    left, mid, right = st.columns([0.75, 1.55, 1.1], gap="medium")
     with left:
-        st.html('<h2 class="vt">This class</h2>')
-        label = st.text_input("Class or section", value=game.label, placeholder="e.g. Section 22")
+        st.html('<h2 class="vt">Rounds</h2>')
         planned = st.number_input("Rounds planned", min_value=1, max_value=12, value=game.planned, step=1)
-        if label != game.label or planned != game.planned:
-            game.label, game.planned = label, int(planned)
+        if planned != game.planned:
+            game.planned = int(planned)
             st.query_params["g"] = game.to_token()
             st.rerun()
     with mid:

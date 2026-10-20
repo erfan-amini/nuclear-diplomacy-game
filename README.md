@@ -24,7 +24,7 @@ Repeat for five rounds (the default; change it in Settings), then end the game.
 
 - **End game** and **New game** sit at the bottom of the left panel, under the
   standings. Each asks you to confirm.
-- **Settings** holds the rest: the section name, rounds planned, undo, the public
+- **Settings** holds the rest: rounds planned, undo, the public
   rules, and three switches (the secret-rule breakdown, the suspense before the
   result, and the explosion).
 - **The address bar holds the game.** A refresh, or the same link opened later,
