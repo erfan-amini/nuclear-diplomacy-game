@@ -108,10 +108,10 @@ section[data-testid="stSidebar"] {width:384px !important; min-width:384px !impor
 /* header row */
 .brand {font-family:"Barlow Condensed",sans-serif; font-weight:700; font-size:2rem; line-height:1; color:var(--signal);
         display:flex; align-items:center; gap:.45rem; white-space:nowrap;}
-.toprow {display:flex; align-items:center; justify-content:space-between; gap:1rem; padding-right:2.4rem;}
-.rnd {text-align:right; color:var(--muted); font-size:.98rem; line-height:1.15;}
+.toprow {display:flex; align-items:center; justify-content:flex-start; gap:1.6rem; padding-right:22rem; min-height:2.6rem;}
+.rnd {text-align:left; color:var(--muted); font-size:.98rem; line-height:1.15; padding-left:1.2rem; border-left:2px solid var(--line);}
 .rnd b {color:var(--ink); font-family:"Barlow Condensed",sans-serif; font-size:1.4rem; font-weight:700;}
-.pips {display:flex; gap:5px; justify-content:flex-end; margin-top:4px;}
+.pips {display:flex; gap:5px; justify-content:flex-start; margin-top:4px;}
 .pip {width:20px; height:6px; border-radius:3px; background:#E3E7ED;}
 .pip.done {background:#8C96A6;} .pip.now {background:var(--signal);}
 
