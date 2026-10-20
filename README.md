@@ -7,21 +7,25 @@ slips, and the app runs the attack stage, updates every GPR and handles sanction
 
 ## Running a game
 
+The standings (GPR and weapons for every country, the world total and the attack odds)
+stay on the left the whole time. The main area follows the round:
+
 1. **Decisions.** Collect all five slips. Click each country's move. Lock them in.
 2. **Attack.** The page shows the world total, the odds of a nuclear terrorist attack,
    and each country's chance of being hit. Click *Run the attack draw*. You can also
-   call or skip the attack yourself (the teacher guide allows this).
+   call or skip the attack yourself (the teacher guide allows this). A hit plays a
+   short full-screen explosion with the country's name.
 3. **Sanctions.** The three most powerful countries decide whether to sanction one or
    both of the two weakest. Tick the boxes, or click *No sanctions*.
 
-Repeat for four rounds (or as many as you like), then *End the game* in the sidebar.
+Repeat for four rounds (or as many as you like), then end the game.
 
-- **Undo** in the sidebar steps back one action at a time.
+- **Settings** holds everything else: the section name, rounds planned, undo, end
+  game, new game, the public rules, and three switches (the secret-rule breakdown,
+  the suspense before the result, and the explosion).
 - **The address bar holds the game.** A refresh, or the same link opened later,
   brings it back exactly.
-- **Show why each GPR changed** reveals the secret country rules. Leave it off while
-  the room can see the screen.
-- **History** has the round-by-round tables, charts and a CSV download.
+- **History** has the round-by-round tables and charts, and a CSV download.
 - **Debrief** shows where each country's points came from, the secret rules and how
   often each fired, and a replay that re-draws the attacks 5,000 times to show how
   much of the result was luck.

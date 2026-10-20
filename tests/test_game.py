@@ -184,3 +184,15 @@ def test_luck_replay_is_a_distribution():
     w = replay_luck(g, runs=2000)
     assert abs(sum(w.values()) - 1) < 1e-9
     assert w["US"] > w["PK"]                             # U.S. starts first, so no attacks keeps it first
+
+
+def test_bad_inputs_are_refused():
+    g = Game(seed=13)
+    with pytest.raises(RuleError):
+        g.submit_moves({**{c: 0 for c in COUNTRIES}, "US": 0.9})
+    g.submit_moves({c: 0 for c in COUNTRIES}); g.set_attack(None)
+    with pytest.raises(RuleError):
+        g.impose_sanctions(["IN", "IN"])
+    with pytest.raises(RuleError):
+        g.impose_sanctions(["XX"])
+    assert g.phase == "sanctions"

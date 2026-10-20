@@ -2,10 +2,17 @@
 base = "light"
 primaryColor = "#C00000"
 backgroundColor = "#FFFFFF"
-secondaryBackgroundColor = "#F5F3EF"
-textColor = "#222222"
-font = "sans serif"
+secondaryBackgroundColor = "#F3F5F8"
+textColor = "#18202C"
+font = "Barlow:https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap"
+headingFont = "'Barlow Condensed':https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&display=swap"
 baseFontSize = 17
+baseRadius = "10px"
+
+[theme.sidebar]
+backgroundColor = "#1B2431"
+secondaryBackgroundColor = "#253042"
+textColor = "#E8EDF3"
 
 [client]
 toolbarMode = "minimal"

@@ -5,7 +5,10 @@ replaying that log, so undo means "drop the last event" and a page refresh can
 restore the game from the log kept in the URL.
 
 Rules follow the K=1 Project teacher guide, the general student instructions and the
-five country sheets, plus one house rule: a country with 0 weapons cannot be sanctioned.
+five country sheets. Choices the instructor made where the sources are silent:
+- a country with 0 weapons cannot be sanctioned (it can still be attacked);
+- a GPR tie across the sanction line (ranks 3 and 4) is broken at random;
+- tied countries share their attack-victim chances equally.
 """
 from __future__ import annotations
 
@@ -66,7 +69,7 @@ RULES = [
 
     ("IN1", "IN", "China built", lambda n, m: _up(m, "CN")),
     ("IN2", "IN", "Pakistan has more weapons than India", lambda n, m: n["PK"] > n["IN"]),
-    ("IN3", "IN", "Pakistan + China have more weapons than Russia", lambda n, m: n["PK"] + n["CN"] > n["RU"]),
+    ("IN3", "IN", "Pakistan and China together have more weapons than Russia", lambda n, m: n["PK"] + n["CN"] > n["RU"]),
 
     ("PK1", "PK", "India has more weapons than Pakistan", lambda n, m: n["IN"] > n["PK"]),
     ("PK2", "PK", "Pakistan has as many weapons as China, or more", lambda n, m: n["PK"] >= n["CN"]),
@@ -249,7 +252,7 @@ class Game:
 
     # ------------------------------------------------------------------ actions
     def submit_moves(self, moves: dict):
-        self._push({"t": "moves", "m": [int(moves[c]) for c in COUNTRIES]})
+        self._push({"t": "moves", "m": [moves[c] for c in COUNTRIES]})
 
     def draw_attack(self, rng: random.Random | None = None):
         """Let the app decide: one draw for 'attack or not', one for the victim."""
@@ -310,7 +313,9 @@ class Game:
         if t == "moves":
             if self.phase != "decide":
                 raise RuleError("decisions are already in for this round")
-            moves = dict(zip(COUNTRIES, ev["m"]))
+            if len(ev["m"]) != len(COUNTRIES) or any(not float(m).is_integer() for m in ev["m"]):
+                raise RuleError("each country needs one whole-number move")
+            moves = dict(zip(COUNTRIES, (int(m) for m in ev["m"])))
             for c in COUNTRIES:
                 if moves[c] not in self.legal_moves(c):
                     raise RuleError(f"{NAMES[c]} cannot move {moves[c]:+d}")
@@ -344,7 +349,11 @@ class Game:
             if self.phase != "sanctions":
                 raise RuleError("not in the sanctions stage")
             targets = list(ev["s"])
+            if len(set(targets)) != len(targets):
+                raise RuleError("a country is listed twice")
             for c in targets:
+                if c not in COUNTRIES:
+                    raise RuleError(f"unknown country {c}")
                 ok, why = self.can_be_sanctioned(c)
                 if not ok:
                     raise RuleError(f"{NAMES[c]} cannot be sanctioned: {why}")
