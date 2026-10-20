@@ -11,14 +11,16 @@ The standings (GPR and weapons for every country, the world total and the attack
 stay on the left the whole time. The main area follows the round:
 
 1. **Decisions.** Collect all five slips. Click each country's move. Lock them in.
-2. **Attack.** The page shows the world total, the odds of a nuclear terrorist attack,
-   and each country's chance of being hit. Click *Run the attack draw*. You can also
+2. **Attack.** The page shows the world total and two strips. The first is split into
+   "attack" and "no attack" by this round's odds. The second is split among the three most
+   powerful countries in proportion to their chances (1 in 2, 1 in 3, 1 in 6). Click
+   *Run the attack draw*: a needle lands on each strip at the random number the app drew. You can also
    call or skip the attack yourself (the teacher guide allows this). A hit plays a
    short full-screen explosion with the country's name.
 3. **Sanctions.** The three most powerful countries decide whether to sanction one or
    both of the two weakest. Tick the boxes, or click *No sanctions*.
 
-Repeat for four rounds (or as many as you like), then end the game.
+Repeat for five rounds (the default; change it in Settings), then end the game.
 
 - **Settings** holds everything else: the section name, rounds planned, undo, end
   game, new game, the public rules, and three switches (the secret-rule breakdown,

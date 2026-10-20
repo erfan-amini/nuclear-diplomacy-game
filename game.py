@@ -182,7 +182,7 @@ class RuleError(ValueError):
 class Game:
     seed: int = field(default_factory=lambda: random.SystemRandom().randrange(10**9))
     label: str = ""
-    planned: int = 4
+    planned: int = 5
     events: list = field(default_factory=list)
 
     # ------------------------------------------------------------------ replay
@@ -369,7 +369,7 @@ class Game:
 
     @classmethod
     def from_dict(cls, d: dict) -> "Game":
-        return cls(seed=int(d["seed"]), label=d.get("label", ""), planned=int(d.get("planned", 4)),
+        return cls(seed=int(d["seed"]), label=d.get("label", ""), planned=int(d.get("planned", 5)),
                    events=list(d.get("ev", [])))
 
     def to_token(self) -> str:
