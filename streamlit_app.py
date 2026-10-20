@@ -404,8 +404,6 @@ def round_html() -> str:
         rtxt = f"<b>Round {r.number}</b> (extra)"
     else:
         rtxt = f"<b>Round {r.number}</b> of {game.planned}"
-    if game.label:
-        rtxt = f"{game.label} &nbsp;&middot;&nbsp; " + rtxt
     total = max(game.planned, n_done + (0 if phase == "over" else 1))
     pips = "".join(f'<span class="pip {"done" if i <= n_done else ("now" if phase != "over" and i == r.number else "")}"></span>'
                    for i in range(1, total + 1))
@@ -767,7 +765,7 @@ def view_history():
             st.altair_chart(line_chart(nw_series, "Weapons", 290), width="stretch")
     elif part == "Round by round":
         st.dataframe(rounds_table(), hide_index=True, width="stretch", height=36 + 35 * len(done) + 2, column_config=FLAGCOL)
-        name = f"nuclear_diplomacy_{(game.label or 'game').replace(' ', '_')}.csv"
+        name = "nuclear_diplomacy_log.csv"
         st.download_button("Download the activity log (CSV)", csv_log(), file_name=name, mime="text/csv",
                            icon=":material/download:")
     else:
@@ -861,7 +859,7 @@ EVENT_TEXT = {"moves": "the decisions", "attack": "the attack stage", "sanctions
 
 
 def new_game():
-    g = Game(label=game.label, planned=game.planned)
+    g = Game(planned=game.planned)
     st.session_state.game = g
     st.query_params["g"] = g.to_token()
     st.session_state.view = "Game"
